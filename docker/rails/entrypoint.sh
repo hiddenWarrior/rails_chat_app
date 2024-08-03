@@ -1,11 +1,9 @@
 #!/bin/bash
 
 
-#if [ "${*}" == "rails server"]; then
 rails db:create
 rails db:prepare
-#fi
-
+rails db:migrate
 
 
 

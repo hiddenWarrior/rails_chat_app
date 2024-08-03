@@ -1,0 +1,2 @@
+class ChatApp < ApplicationRecord
+end
