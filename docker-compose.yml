@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'instabug_chat_development'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'Abc@123456'
+      MYSQL_ROOT_PASSWORD: 'password'
+    volumes:
+      - my-db:/var/lib/mysql
+
+  app:
+    build: 
+      context: .
+      dockerfile: docker/rails/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+volumes:
+  my-db:
