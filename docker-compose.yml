@@ -11,6 +11,15 @@ services:
     volumes:
       - my-db:/var/lib/mysql
 
+
+  redis:
+    image: redis:6.2.14
+    volumes:
+      - redis-data:/data
+    networks:
+      - default
+
+
   app:
     build: 
       context: .
@@ -21,6 +30,8 @@ services:
       - .:/app
     depends_on:
       - db
+      - redis
 
 volumes:
   my-db:
+  redis-data:
