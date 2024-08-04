@@ -4,9 +4,9 @@ class ChatController < ApplicationController
 
     def create
         begin
-            
-            Rails.cache.write(MAIN_INC_KEY, 0, :raw => true,:unless_exist => true, :expires_in => 999999)
-            number = Rails.cache.increment(MAIN_INC_KEY, 1, :raw => true) 
+            cache_key = inc_key(params[:token])
+            Rails.cache.write(cache_key, 0, :raw => true,:unless_exist => true, :expires_in => 999999)
+            number = Rails.cache.increment(cache_key, 1, :raw => true) 
             puts "number is #{number}"
             chat = Chat.new(chat_app: @chat_app, number: number, chat_count: 0) #for now we may use queues later
             chat.save
@@ -19,6 +19,9 @@ class ChatController < ApplicationController
 
     end
     private
+    def inc_key(token)
+        "app:#{token}inc:chat"
+    end
     def set_chat_app
         @chat_app = ChatApp.where(token: params[:token]).first
     end 
