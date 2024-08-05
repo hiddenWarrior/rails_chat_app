@@ -1,8 +1,7 @@
 class MessagesController < ApplicationController
     before_action :set_message_app, only: [:create]
-
     def create
-        # begin
+        begin
             cache_key = inc_key(@chat_app.token, @chat.number)
             Rails.cache.write(cache_key, 0, :raw => true,:unless_exist => true, :expires_in => 999999)
             number = Rails.cache.increment(cache_key, 1, :raw => true) 
@@ -11,11 +10,12 @@ class MessagesController < ApplicationController
             message.save
             render json: message.as_json(except: [:id, :chat_id, :created_at, :updated_at])
                 
-        # rescue
-        #     render json: "Failed: check the app token or chat number please"
-        # end
-
+        rescue
+            render json: "Failed: check the app token or chat number please"
+        end
+    
     end
+        
     private
     def inc_key(token, chat_num)
         "app:#{token}inc:chat:#{chat_num}:message"
