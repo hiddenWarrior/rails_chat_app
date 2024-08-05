@@ -1,5 +1,7 @@
 class ChatApp < ApplicationRecord
-    has_many :chats
+    has_many :chats, dependent: :destroy
+          
+
 
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
