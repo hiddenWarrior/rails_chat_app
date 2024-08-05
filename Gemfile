@@ -42,3 +42,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "elasticsearch-rails", "~> 8.0"
+gem "elasticsearch-model", "~> 8.0"
+gem "elasticsearch-persistence", "~> 8.0"
