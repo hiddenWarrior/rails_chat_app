@@ -44,7 +44,7 @@ class ChatAppsController < ApplicationController
             render json: app.as_json(except: ChatApp.hidden_attributes), :status => 201
                 
         rescue
-            render json: "Failed: please use another name", :status => 400
+            render json: {:error => "please choose another name"}, :status => 400
         end
 
     end
