@@ -1,9 +1,16 @@
 class ChatController < ApplicationController
-    before_action :set_chat_app, only: [:create, :index, :delete]
+    before_action :set_chat_app, only: [:create, :index, :delete, :show]
     def index
         chats = Chat.get_chats(@chat_app.id)
         render json: chats.map {|m| "/app/#{params[:token]}/chat/#{m.number}/"}
     end
+
+    def show
+        chat = Chat.get_chat_by_number(@chat_app.id, params[:number].to_i)
+        msgs = Message.get_all_messages(chat.id)
+        render json: msgs.map {|m| m.text}
+    end
+
 
     def delete
         chat = Chat.get_chat_by_number(@chat_app.id, params[:number].to_i)
