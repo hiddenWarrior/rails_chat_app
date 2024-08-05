@@ -18,6 +18,17 @@ services:
       - redis-data:/data
     networks:
       - default
+  
+  elasticsearch:
+    image: elasticsearch:8.14.3
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    environment:
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "http.host=0.0.0.0"
+      - "transport.host=127.0.0.1"
 
 
   app:
@@ -31,7 +42,9 @@ services:
     depends_on:
       - db
       - redis
+      - elasticsearch
 
 volumes:
   my-db:
   redis-data:
+  esdata01:
