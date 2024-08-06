@@ -1,11 +1,13 @@
 class DestroyMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(msg_num, chat_id)
-    msg_num = params[:msg_num].to_i
-    msg = Message.where("number=? and chat_id=?", msg_num, chat_id).first
+  def perform(token, chat_number, msg_num)
+    key = Message.cache_key(token, chat_number, msg_num)
+    msg = Message.load_cache(key)    
     if msg != nil
       msg.destroy
+      Message.delete_cache(key)
     end
+
 end
 end

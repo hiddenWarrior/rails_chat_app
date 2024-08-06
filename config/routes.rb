@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/app/:token/chat/:number/', to: 'chat#show'
   
   post '/app/:token/chat/:chat_num/message', to: 'messages#create'
+  put '/app/:token/chat/:chat_num/message/:msg_num/', to: 'messages#update'
   get '/app/:token/chat/:chat_num/message', to: 'messages#index'
   post '/app/:token/chat/:chat_num/message/search', to: 'messages#search'
   delete '/app/:token/chat/:chat_num/message/:msg_num/', to: 'messages#delete'

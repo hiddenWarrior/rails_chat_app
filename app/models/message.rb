@@ -1,7 +1,7 @@
 class Message < CachedModel
   belongs_to :chat
-  # after_commit :increment_chat, on: :create
-  # after_commit :decrement_chat, on: :destroy
+  after_commit :increment_chat, on: :create
+  after_commit :decrement_chat, on: :destroy
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   
@@ -14,7 +14,7 @@ class Message < CachedModel
     self.chat.decrement!(:chat_count)
   end
 
-  def cache_key(token, chat_num, message_num)
+  def self.cache_key(token, chat_num, message_num)
     "message:obj:#{token}:#{chat_num}:#{message_num}"
   end
  
