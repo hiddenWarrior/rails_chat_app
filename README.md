@@ -38,3 +38,40 @@ that is there summary and i'll discuss each of them
 
 ```
 
+-  post '/app/'
+  
+   to create ChatApp 
+````
+```
+    curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d \
+'{"name": "chat name"}' \
+ 'http://localhost:3000/app/' ```
+````
+
+-  get '/app/'
+
+   to list all apps
+   ````
+      curl -i -X GET 'http://localhost:3000/app/' 
+   ````
+-  put/patch '/app/:token/'
+
+   to change the name of the ChatApp if you like
+   ````
+     curl -i -X PUT \
+     -H "Content-Type:application/json" \
+     -d \
+     '{"name": "adam1"}' \
+     'http://localhost:3000/app/ef7ff51da82f3fa000b81f0484bb3c8b/'
+   ````
+-  delete '/app/:token/'
+
+   to delete ChatApp
+   ````
+      curl -i -X DELETE \
+      'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/'
+
+   ````
+   
