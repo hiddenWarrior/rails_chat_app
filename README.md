@@ -174,5 +174,7 @@ that is there summary and i'll discuss each of them
 - i should have dropped the puma server and use nginx that is bad
 - i should use Model routes  but im kinda relearning rails and i wanted to move fast
 - for any questions don't hesitate asking
-
+## note
+as i told in technical details of my failed rspec trial you will find it in this pull request
+https://github.com/hiddenWarrior/rails_chat_app/pull/1
     
