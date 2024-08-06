@@ -74,4 +74,35 @@ that is there summary and i'll discuss each of them
       'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/'
 
    ````
-   
+
+- post '/app/:token/chat/'
+
+  create new chat with app token and it return it's numbers with token again
+  ````
+    curl -i -X POST \
+     -d \
+  '{"name": "adam1"}' \
+   'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/'
+  ````
+  
+  - get '/app/:token/chat/'
+     return all chat as get hyperlinks(without host relative url)
+    ````
+        curl -i -X GET \
+     'http://localhost:3000/app/b194be3c8101e7199fd139d46019ca1b/chat/'
+    ````
+
+  -  delete '/app/:token/chat/:number/'
+     delete Chat by ChatApp token and it's number
+     ````
+              curl -i -X DELETE \
+       'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/chat/1/'
+     ````
+  - get '/app/:token/chat/:number/'
+    get all messages of this chat as list the text only
+        
+    ````
+       curl -i -X GET 'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/chat/1/' 
+    ````
+
+    
