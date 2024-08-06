@@ -74,6 +74,7 @@ that is there summary and i'll discuss each of them
       'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/'
 
    ````
+==============================================================================================================
 
 - post '/app/:token/chat/'
 
@@ -86,23 +87,84 @@ that is there summary and i'll discuss each of them
   ````
 
 - get '/app/:token/chat/'
-     return all chat as get hyperlinks(without host relative url)
+
+  return all chat as get hyperlinks(without host relative url)
     ````
         curl -i -X GET \
      'http://localhost:3000/app/b194be3c8101e7199fd139d46019ca1b/chat/'
     ````
 
 -  delete '/app/:token/chat/:number/'
-     delete Chat by ChatApp token and it's number
+
+   delete Chat by ChatApp token and it's number
      ````
               curl -i -X DELETE \
        'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/chat/1/'
      ````
 - get '/app/:token/chat/:number/'
-    get all messages of this chat as list the text only
+
+  get all messages of this chat as list the text only
         
     ````
        curl -i -X GET 'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/chat/1/' 
     ````
+==============================================================================================================
+- post '/app/:token/chat/:chat_num/message'
+
+  posting a message inside chat
+  ````
+    curl -i -X POST \
+     -H "Content-Type:application/json" \
+     -d \
+  '{"text": "hi"}' \
+   'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/1/message/'
+  ````
+- put '/app/:token/chat/:chat_num/message/:msg_num/'
+
+  changing a message inside chat
+  ````
+    curl -i -X POST \
+     -H "Content-Type:application/json" \
+     -d \
+  '{"text": "hey"}' \
+   'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/1/message/'
+  ````
+  
+
+- get '/app/:token/chat/:chat_num/message'
+
+  getting chat message with text and number
+  ````
+    curl -i -X GET \
+   'http://localhost:3000/app/b194be3c8101e7199fd139d46019ca1b/chat/3/message/'
+  ````
+- post '/app/:token/chat/:chat_num/message/search'
+
+  searching through messages of a specific chat
+  ````
+     curl -i -X POST \
+      -H "Content-Type:application/json" \
+      -d \
+   '{"search": "hi"}' \
+    'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/1/message/search'
+  ````
+  
+- delete '/app/:token/chat/:chat_num/message/:msg_num/'
+  
+  deleting a message
+  ````
+    curl -i -X DELETE \
+   'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/1/message/18/'
+  ````
+- get '/app/:token/chat/:chat_num/message/:msg_num/'```
+
+  get a specific message
+  ````
+    curl -i -X GET \
+   'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/1/message/18/'
+  ````
+==============================================================================================================
+
+
 
     
