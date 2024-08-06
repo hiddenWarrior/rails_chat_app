@@ -16,6 +16,7 @@ services:
   db:
     image: mysql:5.7
     restart: always
+    command: mysqld --skip-name-resolve --skip-external-locking
     environment:
       MYSQL_DATABASE: 'instabug_chat_development'
       MYSQL_USER: 'user'
@@ -23,6 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'password'
     volumes:
       - my-db:/var/lib/mysql
+      # - ./docker/mysql/my-resolve.cnf:/etc/mysql/conf.d/my-resolve.cnf:ro
 
 
   redis:
