@@ -1,8 +1,11 @@
-class Chat < ApplicationRecord
+class Chat < CachedModel
   belongs_to :chat_app
   has_many :messages, dependent: :destroy
 
 
+  def self.cache_key(token, number)
+    "chat:obj:token:#{token}:num:#{number}"
+  end
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks

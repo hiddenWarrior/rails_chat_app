@@ -21,10 +21,19 @@ class Message < CachedModel
  
 
   def self.search_messages(chat_id, search_str)
-    Message.search({"query": {"bool": {"must": {"query_string": {"query": search_str,"default_field": "text"}},"filter": {"term": {"chat_id": chat_id.to_i}}}}, sort:["number"]})
+    #in case of empty shard and nothing to
+    begin
+     Message.search({"query": {"bool": {"must": {"query_string": {"query": search_str,"default_field": "text"}},"filter": {"term": {"chat_id": chat_id.to_i}}}}, sort:["number"]}).map{|m| m}
+    rescue
+      []
+    end
   end
   def self.get_all_messages(chat_id)
-    Message.search({"query": {"term": {"chat_id": {"value":chat_id.to_i}}}, sort:["number"] })
+    begin
+      Message.search({"query": {"term": {"chat_id": {"value":chat_id.to_i}}}, sort:["number"] }).map{|m| m}
+    rescue
+      []
+    end
   end
   
 end
