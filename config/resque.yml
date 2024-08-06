@@ -1,0 +1,4 @@
+development: redis:6379
+test: redis:6379
+staging: redis:6379
+production: redis:6379

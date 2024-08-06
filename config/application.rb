@@ -33,7 +33,7 @@ module InstabugChatApi
     # config.eager_load_paths << Rails.root.join("extras")
     config.cache_store = :redis_cache_store, { url: 'redis://redis:6379/0' }
     # config.cache_store = :memory_store
-
+    config.active_job.queue_adapter = :resque
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.

@@ -1,4 +1,17 @@
 version: '3.3'
+
+x-rails-app: &rails-app
+  build: 
+    context: .
+    dockerfile: docker/rails/Dockerfile
+  volumes:
+    - .:/app
+  depends_on:
+    - db
+    - redis
+    - elasticsearch
+
+
 services:
   db:
     image: mysql:5.7
@@ -31,18 +44,15 @@ services:
       - "transport.host=127.0.0.1"
 
 
+
   app:
-    build: 
-      context: .
-      dockerfile: docker/rails/Dockerfile
+    <<: *rails-app
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-    depends_on:
-      - db
-      - redis
-      - elasticsearch
+  worker:
+    <<: *rails-app
+    entrypoint: []
+    command: bundle exec rake environment resque:work QUEUE=*
 
 volumes:
   my-db:
