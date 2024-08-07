@@ -7,7 +7,6 @@ class UpdateChatAppJob < ApplicationJob
     cached_app = ChatApp.load_cache(key)
 
     if cached_app != nil
-      puts "hey"
       app = ChatApp.find(cached_app.id)
       app.delete_cache(ChatApp.cache_key_name(app.name)) # the old key name
       app.update(name: name)

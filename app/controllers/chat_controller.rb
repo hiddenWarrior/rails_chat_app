@@ -27,13 +27,6 @@ class ChatController < ApplicationController
         number = params[:number].to_i
         DestroyChatJob.perform_later(@chat_app.id, @token, number)
         render :json => {:result => "command registered succesffuly"}
-        # chat = Chat.get_chat_by_number(@chat_app.id, params[:number].to_i)
-        # if chat == nil
-        #     render json: {:error => "chat not found"}, :status => 404
-        # else
-        #     chat.destroy
-        #     render json: chat.as_json(except: [:id, :chat_app_id, :created_at, :updated_at]), :status => 202
-        # end
 
     end
 
@@ -44,9 +37,6 @@ class ChatController < ApplicationController
             number = Rails.cache.increment(cache_key, 1, :raw => true) 
             CreateChatJob.perform_later(@chat_app.id, @token, number)
             render :json => {:token => @token, :number => number}
-            # chat = Chat.new(chat_app: @chat_app, number: number, chat_count: 0) #for now we may use queues later
-            # chat.save
-            # render json: chat.as_json(except: [:id, :chat_app_id, :created_at, :updated_at]), :status => 201
                 
         rescue
             render json: {:error => "check the app token please"}, :status => 400
@@ -58,7 +48,6 @@ class ChatController < ApplicationController
         "app:#{token}inc:chat"
     end
     def set_chat_app
-        # @chat_app = ChatApp.where(token: params[:token]).first
         @token = params[:token]
         @chat_app = ChatApp.load_cache(ChatApp.cache_key(params[:token]))
     end 

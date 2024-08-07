@@ -11,7 +11,6 @@ class MessagesController < ApplicationController
         msg_num = params[:msg_num].to_i
         key = Message.cache_key(@chat_app.token, @chat.number, msg_num.to_s)
         @message = Message.load_cache(key)
-        puts @message
         if @chat_app != nil and @chat != nil and @message != nil
             number = @message.number 
             json_params = JSON.parse(request.raw_post)
@@ -32,8 +31,6 @@ class MessagesController < ApplicationController
             json_params = JSON.parse(request.raw_post)
             text = json_params["text"]
             CreateMessageJob.perform_later(@chat_app.token, @chat.id, @chat.number, number, text)
-            # message = Message.new(chat: @chat, number: number, text: json_params["text"]) #for now we may use queues later
-            # message.save
             render json: {:text => text, :number => number}, :status => 200    
         else
             render json: {:error => "check the app token or chat number please"}.to_json, :status => 404 

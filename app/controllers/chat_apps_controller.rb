@@ -11,27 +11,14 @@ class ChatAppsController < ApplicationController
         js = JSON.parse(request.raw_post)
         name = js["name"]
         token = params[:token]
-        puts ChatApp.cache_key_name(name)
-        puts ChatApp.load_cache(ChatApp.cache_key_name(name))
         if ChatApp.load_cache(ChatApp.cache_key_name(name)) != nil 
             render :json => {:error => "please choose another name"}.to_json, :status => 400
         elsif ChatApp.load_cache(ChatApp.cache_key(token)) == nil 
             render :json => {:error => "unknown app token"}.to_json, :status => 404            
         else
-            puts "keep at"
             UpdateChatAppJob.perform_later(token, name)
             render :json => {:name => name, :token => token}, :status => 200   
         end
-        # app = ChatApp.where("token = ?", params[:token]).first
-        # if app == nil
-        #     render :json => {:error => "not found"}.to_json, :status => 404
-        # else
-        #     js = JSON.parse(request.raw_post)
-        #     if js["name"] != nil
-        #       app.update(name: js["name"])
-        #     end
-        #     render json: app.as_json(except: ChatApp.hidden_attributes), :status => 202   
-        # end
         
     end
     def delete
@@ -44,13 +31,6 @@ class ChatAppsController < ApplicationController
         else
             render :json => {:error => "not found"}.to_json, :status => 404
         end
-        # app = ChatApp.where("token = ?", params[:token]).first
-        # if app == nil
-        #     render :json => {:error => "not found"}.to_json, :status => 404
-        # else
-        #     app.destroy
-        #     render json: app.as_json(except: ChatApp.hidden_attributes), :status => 202   
-        # end
         
     end
 

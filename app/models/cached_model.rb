@@ -3,8 +3,6 @@ class CachedModel < ApplicationRecord
   
     def cache_object(key)
         str = JSON.generate(self.attributes)
-        puts "hi"
-        puts str
         Rails.cache.write(key, str ,:expires_in => 99999)
 
     end
@@ -19,17 +17,13 @@ class CachedModel < ApplicationRecord
     end
 
     def delete_cache(key)
-        puts "hi from delete"
         js_str = Rails.cache.delete(key)
-        puts js_str
         js_str
 
     end
 
     def self.delete_cache(key)
-        puts "hi from delete"
         js_str = Rails.cache.delete(key)
-        puts js_str
         js_str
     end
 
