@@ -108,7 +108,8 @@ that is there summary and i'll discuss each of them
     ````
        curl -i -X GET 'http://localhost:3000/app/966cabf4a389d972880a1eec25ac04b5/chat/1/' 
     ````
-==============================================================================================================
+==========================================================================================
+
 - post '/app/:token/chat/:chat_num/message'
 
   posting a message inside chat
@@ -163,7 +164,8 @@ that is there summary and i'll discuss each of them
     curl -i -X GET \
    'http://localhost:3000/app/7d90bb0081eb863131805fe95e54d06a/chat/1/message/18/'
   ````
-==============================================================================================================
+==========================================================================================
+
 
 ## technical specs
 - for the numbering in distrbuted system i used redis incr which prevent race errors in incrementing it
