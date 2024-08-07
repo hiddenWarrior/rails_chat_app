@@ -172,7 +172,7 @@ that is there summary and i'll discuss each of them
 - for caching to prevent alot of querying you will find a generic model called CachedModel contains most internal parts in caching the rest is the jobs and controllers i used elasticsearch in some cases too
 - i tried to add tests but when i tried with Rspec and i added multiple tests but the model started to act weird so i dropped it because it's more important to rspec code without harming
 - i should have dropped the puma server and use nginx that is bad
-- i should use Model routes  but im kinda relearning rails and i wanted to move fast
+- i should use resources(Model routes)  but im kinda relearning rails and i wanted to move fast
 - i should make cache 0 to make it permanant but i didn't have time to test it
 - for any questions don't hesitate asking
 ## note
