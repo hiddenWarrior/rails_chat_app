@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
     def search
         json_params = JSON.parse(request.raw_post)
         msgs = Message.search_messages(@chat.id, json_params["search"])
-        render json: msgs.map {|m| m.text}
+        render json: msgs.map {|m| {:text => m.text, :number => m.number}}
 
     end
 
