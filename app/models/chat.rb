@@ -10,7 +10,11 @@ class Chat < CachedModel
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   def self.get_chats(chat_app_id)
-    Chat.search({"query": {"term": {"chat_app_id": {"value":chat_app_id.to_i}}}, sort:["number"] })
+    begin
+      Chat.search({"query": {"term": {"chat_app_id": {"value":chat_app_id.to_i}}}, sort:["number"] }).map {|c| c }
+    rescue
+      []
+    end
   end
 
   def self.get_chat_by_number(chat_app_id, number)
