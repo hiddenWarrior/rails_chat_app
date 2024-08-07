@@ -173,6 +173,7 @@ that is there summary and i'll discuss each of them
 - i tried to add tests but when i tried with Rspec and i added multiple tests but the model started to act weird so i dropped it because it's more important to rspec code without harming
 - i should have dropped the puma server and use nginx that is bad
 - i should use Model routes  but im kinda relearning rails and i wanted to move fast
+- i should make cache 0 to make it permanant but i didn't have time to test it
 - for any questions don't hesitate asking
 ## note
 as i told in technical details of my failed rspec trial you will find it in this pull request
